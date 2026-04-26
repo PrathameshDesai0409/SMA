@@ -1,4 +1,4 @@
-CODE 1:
+CODE 1: competitor activityanalysis
 
 import pandas as pd
 from google_play_scraper import reviews, Sort

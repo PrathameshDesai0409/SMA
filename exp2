@@ -1,4 +1,4 @@
-CODE:
+CODE: Scrape data from social media
 
 import requests
 from bs4 import BeautifulSoup

@@ -1,4 +1,4 @@
-CODE:
+CODE: perfrom data cleaning and storage 
 
 import pandas as pd
 import re

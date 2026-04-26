@@ -1,4 +1,4 @@
-CODE:
+CODE: develop structure based social media analytics model for any business
 
 import pandas as pd
 import networkx as nx
