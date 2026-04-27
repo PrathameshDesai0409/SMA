@@ -1,0 +1,125 @@
+EXP 3
+import pandas as pd
+
+#1. Load Dataset
+df = pd.read_csv(r'C:\Users\OneDrive\Desktop\PROJECTS\ADS\superstore.csv', encoding_errors='ignore')  
+
+#2. Return first 5 rows
+print("First 5 rows of the dataset:")
+print(df.head())
+
+print(f"\nDataset Shape: {df.shape}")
+print(f"Columns in the dataset: {df.columns}")
+
+#3. Missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+#4. Summary statistics (numerical columns)
+print("\nSummary Statistics:")
+print(df.describe())
+
+#5. Check & Remove Duplicate rows 
+print(f"\nNumber of duplicate rows: {df.duplicated().sum()}")
+df = df.drop_duplicates()
+
+#6. Handle missing values (drop rows with missing values)
+df = df.dropna()
+
+# Check the dataset after cleaning
+print(f"\nCleaned Dataset Shape: {df.shape}")
+
+df.to_csv(r'C:\Users\OneDrive\Desktop\PROJECTS\ADS\cleaned.csv', index=False)
+print("Cleaned dataset has been saved as 'cleaned.csv' in the Downloads folder.")
+
+EXP 4
+VISUALIZATION:
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("your_file.csv")
+
+x = df.iloc[:,0]
+y = df.iloc[:,1]
+
+#1 Line
+plt.plot(x,y)
+plt.show()
+
+#2 Bar
+plt.bar(x[:10],y[:10])
+plt.show()
+
+#3 Scatter
+plt.scatter(x,y)
+plt.show()
+
+#4 Histogram
+plt.hist(y)
+plt.show()
+
+#5 Box
+plt.boxplot(y)
+plt.show()
+
+#6 Pie
+plt.pie(y[:5])
+plt.show()
+
+#7 Area
+plt.fill_between(range(len(y[:20])), y[:20])
+plt.show()
+
+#8 Stem
+plt.stem(y[:20])
+plt.show()
+
+#9 Step
+plt.step(x[:20],y[:20])
+plt.show()
+
+#10 Heatmap
+plt.imshow(df.corr())
+plt.show()
+
+EXP 5
+import pandas as pd
+import matplotlib.pyplot as plt
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from wordcloud import WordCloud
+
+nltk.download('vader_lexicon')
+
+# Load data
+df = pd.read_csv("sentimentdataset.csv")
+
+# Sentiment analyzer
+sia = SentimentIntensityAnalyzer()
+
+# Sentiment classification
+def sentiment(text):
+    score = sia.polarity_scores(str(text))["compound"]
+
+    if score > 0.05:
+        return "Positive"
+    elif score < -0.05:
+        return "Negative"
+    else:
+        return "Neutral"
+
+df["Sentiment"] = df["Text"].apply(sentiment)
+
+# Bar graph
+df["Sentiment"].value_counts().plot(kind="bar")
+plt.show()
+
+# Word cloud
+text = " ".join(df["Text"])
+wc = WordCloud().generate(text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print(df.head())
